@@ -20,8 +20,7 @@ public class CourseEntity {
 
     String name;
 
-    @OneToMany
-    @JoinColumn(name = "course_id")
+    @ManyToMany
     List<StudentEntity> students = new ArrayList<>();
 
     public void setName(String name) {
@@ -48,12 +47,21 @@ public class CourseEntity {
         this.students = students;
     }
 
+    public void addStudent(StudentEntity studentEntity){
+        this.students.add(studentEntity);
+    }
+
     public void setStudents(StudentEntity students) {
         this.students.add(students);
     }
 
     public String toString() {
-        return "ID: " + this.id + " Course Name: " + this.name;
+        String printStudent = "";
+        for(StudentEntity student : students){
+            printStudent = printStudent + student.getName() + " ";
+        }
+
+        return "ID: " + this.id + " Course Name: " + this.name + " Students: " + printStudent;
     }
 
 }

@@ -44,18 +44,22 @@ public class ClassManagerApplication implements CommandLineRunner {
         StudentEntity julie = new StudentEntity("Julie");
         StudentEntity paul = new StudentEntity("Paul");
         StudentEntity pete = new StudentEntity("Pete");
+        StudentEntity vicki = new StudentEntity("Vicki");
 
         // Set Student Course Selections
         javaCourse.setStudents(janet);
         javaCourse.setStudents(julie);
         pythonCourse.setStudents(paul);
         pythonCourse.setStudents(pete);
+        pythonCourse.setStudents(vicki);
+        javaCourse.setStudents(vicki);
 
         // Save Students
         studentDao.save(janet);
         studentDao.save(julie);
         studentDao.save(paul);
         studentDao.save(pete);
+        studentDao.save(vicki);
 
         // Save Courses w/ Student info
         // We need to 'update' the courses with the new relationship,
@@ -70,5 +74,8 @@ public class ClassManagerApplication implements CommandLineRunner {
             System.out.println("Found Student: " + student);
         }
 
+        System.out.println("Course: ");
+        System.out.println(javaCourse.toString());
+        System.out.println(pythonCourse.toString());
     }
 }

@@ -7,22 +7,21 @@
 
 package com.lc101.classmanager;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class StudentEntity {
 
     @Id
     @GeneratedValue
-    Integer id;
+    private Integer id;
 
-    String name;
+    private String name;
 
-    @ManyToOne
-    CourseEntity course;
+    @ManyToMany(mappedBy = "students")
+    private List<CourseEntity> courses = new ArrayList<>();
 
     public StudentEntity() {
     }
@@ -47,8 +46,16 @@ public class StudentEntity {
         return this.id;
     }
 
+    public void addCourse(CourseEntity courseEntity){
+        this.courses.add(courseEntity);
+    }
+
+    public List<CourseEntity> getCourses(){
+        return this.courses;
+    }
+
     public String toString() {
-        return "ID: " + this.id + " Name: " + this.name + " course: " + course;
+        return "ID: " + this.id + " Name: " + this.name;
     }
 
 }
